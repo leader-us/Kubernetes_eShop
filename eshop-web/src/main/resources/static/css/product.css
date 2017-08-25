@@ -1,0 +1,56 @@
+body{
+  font-family: 'microsoft yahei',Arial,sans-serif;
+  color: #898989;
+}
+ 
+.shape{    
+	border-style: solid; border-width: 0 80px 80px 0; float:right; height: 0px; width: 0px;
+	-ms-transform:rotate(360deg); /* IE 9 */
+	-o-transform: rotate(360deg);  /* Opera 10.5 */
+	-webkit-transform:rotate(360deg); /* Safari and Chrome */
+	transform:rotate(360deg);
+}
+ 
+.speical{
+	background:#fff; border:1px solid #ddd; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); margin: 15px 0; overflow:hidden;
+}
+ 
+.speical:hover {
+    -webkit-transform: scale(1.1); 
+    -moz-transform: scale(1.1); 
+    -ms-transform: scale(1.1); 
+    -o-transform: scale(1.1); 
+    transform:rotate scale(1.1); 
+    -webkit-transition: all 0.4s ease-in-out; 
+    -moz-transition: all 0.4s ease-in-out; 
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+ 
+.shape {
+	border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
+}
+ 
+.speical-default{
+  border: 1px solid #d9534f;
+}
+ 
+.speical-radius{
+	border-radius:5px;
+}
+ 
+.shape-text{
+	color:#fff; font-size:14px; position:relative; right:-45px; top:2px; white-space: nowrap;
+	-ms-transform:rotate(45deg); /* IE 9 */
+	-o-transform: rotate(45deg);  /* Opera 10.5 */
+	-webkit-transform:rotate(45deg); /* Safari and Chrome */
+	transform:rotate(45deg);
+}	
+ 
+.text-special-default{
+  color:#d9534f;
+}
+ 
+.speical-content{
+	padding:0 20px 10px;
+}

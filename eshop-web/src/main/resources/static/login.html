@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>My Shop Plantform</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/form-elements.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.backstretch.min.js"></script>
+    <script src="js/login.js"></script>
+</head>
+
+<body>
+<div class="form-bottom">
+    <form role="form" action="/account/login" method="post" class="login-form">
+        <div class="form-group">
+            <label class="sr-only" for="form-username">Username</label>
+            <input type="text" name="username" placeholder="Username..."
+                   class="form-username form-control" id="form-username">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="form-password">Password</label>
+            <input type="password" name="password" placeholder="Password..."
+                   class="form-password form-control" id="form-password">
+        </div>
+        <input type="submit" class="btn" value="Sign in!"/>
+    </form>
+</div>
+</body>
+</html>

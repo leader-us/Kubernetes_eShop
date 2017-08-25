@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<Filters>
+				<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%t] (%l) - %m%n" />
+		</Console>
+
+		<!--<RollingFile name="rollingFile" fileName="log/monitor.log" append="true" filePattern="log/monitor.log.%d{yyyy-MM-dd-HH}">-->
+			<!--<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [%t] (%l) - %m%n" />-->
+			<!--<Policies>-->
+				<!--<OnStartupTriggeringPolicy/>-->
+				<!--<SizeBasedTriggeringPolicy size="250 MB"/>-->
+				<!--<TimeBasedTriggeringPolicy/>-->
+			<!--</Policies>-->
+		<!--</RollingFile>-->
+	</Appenders>
+
+	<Loggers>
+		<root level="info" includeLocation="true">
+			<appender-ref ref="console" />
+		</root>
+		<!--<asyncRoot level="debug" includeLocation="true">-->
+			<!--<AppenderRef ref="console" />-->
+		<!--</asyncRoot>-->
+	</Loggers>
+</Configuration>
