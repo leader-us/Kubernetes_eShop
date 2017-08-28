@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eshop-web
+    spec:
+      containers:
+      - name: eshopweb
+        image: chen/java:8
+        imagePullPolicy:
+        ports:
+          - containerPort: 8033
+        volumeMounts:
+        - mountPath: /jar
+          name: jarvolume
+        command: ["/jar/eshop-jar-run.sh"]
+      volumes:
+      - name: jarvolume
+        hostPath:
+          path: /root/eShop/eshop_jar
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-web-ser
+spec:
+  type: NodePort
+  sessionAffinity: ClientIP
+  selector:
+    app: eshop-web
+  ports:
+  - port: 8033
+    nodePort: 30003
