@@ -38,7 +38,7 @@ docker pull centos:7
 Dockerfile：制做Centos 7的Java环境镜像。需要自行下载Java jdk、java jre包放到用Dockerfile的同目录，包详情与版本参看Dockerfile中。
 
 创建镜像
-docker build -t chen/java:8
+docker build -t chen/java:8 .
 
 ====================K8S 建模===================================
 eshop-db.yaml： redis、mysql建模yaml文件
