@@ -30,5 +30,42 @@ Dockerfile：制做Centos 7的Java环境镜像。需要自行下载Java jdk、ja
 docker build -t chen/java:8
 
 ====================K8S 建模===================================
+eshop-db.yaml： redis、mysql建模yaml文件
+
+eshop-web.yaml：jar建模yaml文件
+
+eshop-jar-run.sh：运行jar的脚本
+
+==========================数据库配置文件========================
+application-auth.yml：eshop_k8s_auth_service.jar服务配置文件
+application-cart.yml：eshop_k8s_cart-service.jar服务配置文件
+application-product.yml：eshop_k8s_product-service.jar服务配置文件
+application-web.yml：eshop_k8s_eshop_web.jar配置文件
+注：里面的IP根据实际情况修改。
+=========================运行说明==============================
+1、创建目录  mkdir /root/eShop/eshop_jar  -P  
+2、把下列文件放到eshop_jar目录下
+Dockerfile
+jdk-8u131-linux-x64.rpm
+jre-8u131-linux-x64.rpm
+eshop-jar-run.sh
+eshop-db.yaml
+eshop-web.yaml 
+eshop_k8s_auth_service.jar
+eshop_k8s_cart-service.jar
+eshop_k8s_product-service.jar
+eshop_k8s_eshop_web.jar
+application-auth.yml
+application-cart.yml
+application-product.yml
+application-web.yml
+
+3、chmod +x eshop-jar-run.sh 为脚本赋予执行权限。
+
+4、执行脚本创建
+[root@kub-master eshop_jar]# kubectl create -f eshop-db.yaml
+[root@kub-master eshop_jar]# kubectl create -f eshop-web.yaml 
+
+5、最后通过http://ip:30003 可访问
 
 
