@@ -2,7 +2,7 @@ spring:
   application:
     name: eshop-web
   redis:
-    host: 
+    host: 192.168.18.134
     port: 6379
     #password:
 server:
@@ -12,9 +12,9 @@ server:
     uri-encoding: UTF-8
 myapp:
    restserviceurl:
-     account: http://auth-web:8034
-     cart: http://cart-web:8035
-     product: http://product-web:8036
+     account: http://localhost:8034
+     cart: http://localhost:8035
+     product: http://localhost:8036
    
 logging:
   config: classpath:log4j2.xml

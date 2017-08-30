@@ -7,6 +7,7 @@ metadata:
 spec:
   ports:
     - port: 8033
+      nodePort: 30080
   selector:
     app: eshop-web
     tier: frontend
@@ -35,5 +36,11 @@ spec:
           value: session-redis
         - name: REDIS_PORT
           value: "6379"
+        - name: ACCOUNT_URL
+          value: "http://auth-web:8034"
+        - name: CART_URL
+          value: "http://cart-web:8035"
+        - name: PRODUCT_URL
+          value: "http://product-web:8036"
         ports:
         - containerPort: 8033
