@@ -1,24 +1,24 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: eshop-web
+  name: eshop-cart
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: eshop-web
+        app: eshop-cart
     spec:
       containers:
-      - name: eshop-web
+      - name: eshop-cart
         image: chen/java:8
         imagePullPolicy:
         ports:
-          - containerPort: 8033
+          - containerPort: 8035
         volumeMounts:
         - mountPath: /jar
           name: jarvolume
-        command: ["/jar/eshop-web-svc-run.sh"]
+        command: ["/jar/eshop-cart-svc-run.sh"]
       volumes:
       - name: jarvolume
         hostPath:
@@ -27,12 +27,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eshop-web-svc
+  name: eshop-cart-svc
 spec:
   type: LoadBalancer
-  sessionAffinity: None
+  sessionAffinity: ClientIP
   selector:
-    app: eshop-web
+    app: eshop-cart
   ports:
-  - port: 8033
-    nodePort: 30003
+  - port: 8035
+    targetPort: 8035

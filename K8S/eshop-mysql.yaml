@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: eshop-mysql-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /tmp/data/mysql/eshop
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: eshop-mysql-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  volumeName: eshop-mysql-pv
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eshop-mysql
+    spec:
+      containers:
+      - name: mysql
+        image: docker.io/mysql:5.7
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: eshop-mysql-data
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: eshop-mysql-pwd
+              key: password.txt
+        - name: MYSQL_DATABASE
+          value: "HPE_APP"
+        - name: MYSQL_USER
+          value: "lession"
+        - name: MYSQL_PASSWORD
+          value: "mypass"
+        ports:
+          - containerPort: 3306
+      volumes:
+      - name: eshop-mysql-data
+        persistentVolumeClaim:
+          claimName: eshop-mysql-pvc  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-mysql-svc
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  selector:
+    app: eshop-mysql
+  ports:
+  - port: 3306
+    targetPort: 3306

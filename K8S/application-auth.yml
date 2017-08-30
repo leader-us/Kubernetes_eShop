@@ -3,7 +3,7 @@ spring:
     name: eshop-auth-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.18.134:30002/HPE_APP?useSSL=false
+    url: jdbc:mysql://eshop-mysql-svc:3306/HPE_APP?useSSL=false
     username: lession
     password: mypass
     driver-class-name: com.mysql.jdbc.Driver

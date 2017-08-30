@@ -1,24 +1,24 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: eshop-web
+  name: eshop-auth
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: eshop-web
+        app: eshop-auth
     spec:
       containers:
-      - name: eshop-web
+      - name: eshop-auth
         image: chen/java:8
         imagePullPolicy:
         ports:
-          - containerPort: 8033
+          - containerPort: 8034
         volumeMounts:
         - mountPath: /jar
           name: jarvolume
-        command: ["/jar/eshop-web-svc-run.sh"]
+        command: ["/jar/eshop-auth-svc-run.sh"]
       volumes:
       - name: jarvolume
         hostPath:
@@ -27,12 +27,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: eshop-web-svc
+  name: eshop-auth-svc
 spec:
   type: LoadBalancer
-  sessionAffinity: None
+  sessionAffinity: ClientIP
   selector:
-    app: eshop-web
+    app: eshop-auth
   ports:
-  - port: 8033
-    nodePort: 30003
+  - port: 8034
+    targetPort: 8034
