@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-web
+  labels:
+    app: cart-web
+spec:
+  ports:
+    - port: 8035
+  selector:
+    app: cart-web
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cart-web
+  labels:
+    app: cart-web
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cart-web
+        tier: frontend
+    spec:
+      containers:
+      - image: cart:v1
+        name: cart
+        env:
+        - name: REDIS_HOST
+          value: session-redis
+        - name: REDIS_PORT
+          value: "6379"
+        ports:
+        - containerPort: 8035
