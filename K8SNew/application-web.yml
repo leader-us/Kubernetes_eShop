@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: eshop-web
+  redis:
+    host: eshop-redis-svc
+    port: 6379
+    #password:
+server:
+  port: 8033
+  context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+myapp:
+   restserviceurl:
+     account: http://eshop-auth-svc:8034
+     cart: http://eshop-cart-svc:8035
+     product: http://eshop-product-svc:8036
+   
+logging:
+  config: classpath:log4j2.xml
