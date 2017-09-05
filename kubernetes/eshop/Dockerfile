@@ -1,8 +1,6 @@
-FROM centos
+FROM docker.io/anapsix/alpine-java
 
 WORKDIR /opt/app/eshop_service/
-
-RUN yum install -y java
 
 COPY eshop_k8s_eshop_web.jar /opt/app/eshop_service/
 
