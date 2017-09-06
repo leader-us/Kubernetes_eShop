@@ -1,0 +1,33 @@
+GapiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  labels:
+    app: redis-deploy
+spec:
+  ports:
+    - port: 6379
+  selector:
+    app: redis-deploy
+    tier: redis
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  labels: 
+    app: redis-deploy
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: redis-deploy
+        tier: redis
+    spec: 
+      containers: 
+      - image: redis
+        imagePullPolicy: IfNotPresent
+        name: reids

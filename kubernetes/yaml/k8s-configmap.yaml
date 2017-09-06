@@ -1,0 +1,10 @@
+piVersion: v1
+kind: ConfigMap
+metadata:
+  name: eshop-configmap
+data:
+  redis-host: redis-service
+  redis-port: "6379"
+  mysql-host: mysql-service
+  mysql-user: lession
+  mysql-pass: mypass
