@@ -19,7 +19,7 @@
 	</Appenders>
 
 	<Loggers>
-		<root level="debug" includeLocation="true">
+		<root level="info" includeLocation="true">
 			<appender-ref ref="console" />
 		</root>
 		<!--<asyncRoot level="debug" includeLocation="true">-->

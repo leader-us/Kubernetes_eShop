@@ -29,5 +29,6 @@ spec:
     spec: 
       containers: 
       - image: redis
+        imagePullPolicy: IfNotPresent
         name: reids
 
