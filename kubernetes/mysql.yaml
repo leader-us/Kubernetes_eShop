@@ -58,6 +58,8 @@ spec:
       - image: mysql:5.7
         name: mysql
         env:
+        - name: MYSQL_DATABASE
+          value: HPE_APP
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
