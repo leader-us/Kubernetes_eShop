@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-cart
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eshop-cart
+    spec:
+      containers:
+      - name: eshop-cart
+        image:  eshop/eshop-cart:1.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: /opt/app/eshop/cart/config
+        ports:
+          - containerPort: 8035
+        command: ["/opt/app/eshop/cart/eshop-cart-svc-run.sh"]
+      volumes:
+      - name: config
+        configMap:
+          name: eshop-cart-config  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-cart-svc
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  selector:
+    app: eshop-cart
+  ports:
+  - port: 8035
+    targetPort: 8035
