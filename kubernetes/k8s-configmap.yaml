@@ -1,0 +1,14 @@
+piVersion: v1
+kind: ConfigMap
+metadata:
+  name: eshop-configmap
+data:
+  redis-host: redis-svc
+  redis-port: "6379"
+  mysql-host: mysql-svc
+  mysql-user: lession
+  mysql-pass: mypass
+  eshop-auth-url: "http://eshop-auth-svc:8034/"
+  eshop-cart-url: "http://eshop-cart-svc:8035/"
+  eshop-product-url: "http://eshop-product-svc:8036/"
+  

@@ -10,7 +10,7 @@ sh start-product.sh
 sleep 2
 sh start-cart.sh
 sleep 2
-sh start-eshop.sh
+sh start-eshop-web.sh
 sleep 5
 
 kubectl get pod

@@ -1,4 +1,4 @@
 #!/bin/sh
 echo 'create auth deployment.....'
 
-kubectl create -f yaml/auth-service.yaml
+kubectl create -f auth-service/eshop-auth.yaml

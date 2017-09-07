@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-product-svc
+  labels:
+    app: eshop-product-svc
+spec:
+  ports:
+    - port: 8036
+  selector:
+    app: eshop-product-deploy
+    tier: frontend
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-product-deploy
+  labels:
+    app: eshop-product-deploy
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: eshop-product-deploy
+        tier: frontend
+    spec:
+      containers:
+      - image: eshop-product-image:v1
+        name: eshop-product
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: mysql-pass
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: mysql-host
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: mysql-user
+        ports:
+        - containerPort: 8036

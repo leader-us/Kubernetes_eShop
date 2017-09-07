@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-web-svc
+  labels:
+    app: eshop-web-svc
+spec:
+  ports:
+    - port: 8033
+      nodePort: 30080
+  selector:
+    app: eshop-web-deploy
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-web-deploy
+  labels:
+    app: eshop-web-deploy
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: eshop-web-deploy
+        tier: frontend
+    spec:
+      containers:
+      - image: eshop-web:v1
+        name: eshop
+        env:
+        - name: REDIS_HOST
+          valueFrom: 
+            configMapKeyRef:
+              name: eshop-configmap
+              key: redis-host
+        - name: REDIS_PORT
+          valueFrom: 
+            configMapKeyRef:
+              name: eshop-configmap
+              key: redis-port
+        - name: ACCOUNT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: eshop-auth-url
+        - name: CART_URL
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: eshop-cart-url
+        - name: PRODUCT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: eshop-product-url
+

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-kubectl create -f yaml/redis-service.yaml
+kubectl create -f redis-svc.yaml
