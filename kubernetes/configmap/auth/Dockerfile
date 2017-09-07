@@ -6,7 +6,6 @@ ENV LANG C.UTF-8
 RUN { mkdir -p /opt/app/eshop/auth; }
 
 COPY eshop_k8s_auth_service.jar /opt/app/eshop/auth/
-COPY application-auth.yml /opt/app/eshop/auth/
 COPY eshop-auth-svc-run.sh /opt/app/eshop/auth/
 
 RUN { \
