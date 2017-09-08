@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kubect create -f k8s-configmap.yaml 
+kubectl create -f k8s-configmap.yaml 
 
 sh start-redis.sh
 sleep 2
