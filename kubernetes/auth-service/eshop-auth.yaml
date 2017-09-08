@@ -30,21 +30,15 @@ spec:
       containers:
       - image: eshop-auth-image:v1
         name: eshop-auth
-        env:
-        - name: DB_PASSWORD
-          valueFrom: 
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-auth-mysql-pass
-        - name: DB_HOST
-          valueFrom: 
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-auth-mysql-host
-        - name: DB_USER
-          valueFrom:        
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-auth-mysql-user
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/app/eshop_service/config
         ports:
         - containerPort: 8034
+      volumes:
+        - name: config-volume
+          configMap:
+            name: eshop-configmap
+            items:
+            - key: eshop-auth-conf
+              path: application.yml

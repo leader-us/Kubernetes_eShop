@@ -31,30 +31,15 @@ spec:
       containers:
       - image: eshop-web:v1
         name: eshop
-        env:
-        - name: REDIS_HOST
-          valueFrom: 
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-web-redis-host
-        - name: REDIS_PORT
-          valueFrom: 
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-web-redis-port
-        - name: ACCOUNT_URL
-          valueFrom:
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-auth-url
-        - name: CART_URL
-          valueFrom:
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-cart-url
-        - name: PRODUCT_URL
-          valueFrom:
-            configMapKeyRef:
-              name: eshop-configmap
-              key: eshop-product-url
-
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/app/eshop_service/config
+        ports:
+        -  containerPort: 8033
+      volumes:
+        - name: config-volume
+          configMap:
+            name: eshop-configmap
+            items:
+            - key: eshop-web-conf
+              path: application.yml

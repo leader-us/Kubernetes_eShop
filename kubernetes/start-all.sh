@@ -1,6 +1,6 @@
 #!/bin/bash
 
-kubectl create -f k8s-configmap.yaml 
+kubectl create configmap eshop-configmap --from-file=eshop-auth-conf=auth-service/application.yml --from-file=eshop-web-conf=eshop-web/application.yml --from-file=eshop-cart-conf=cart-service/application.yml --from-file=eshop-product-conf=product-service/application.yml
 
 sh start-redis.sh
 sleep 2
