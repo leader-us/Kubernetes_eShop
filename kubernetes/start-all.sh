@@ -1,5 +1,7 @@
 #!/bin/bash
 
+kubect create -f k8s-configmap.yaml 
+
 sh start-redis.sh
 sleep 2
 sh start-mysql.sh
