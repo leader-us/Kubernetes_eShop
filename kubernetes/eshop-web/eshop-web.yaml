@@ -36,12 +36,12 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: eshop-configmap
-              key: redis-host
+              key: eshop-web-redis-host
         - name: REDIS_PORT
           valueFrom: 
             configMapKeyRef:
               name: eshop-configmap
-              key: redis-port
+              key: eshop-web-redis-port
         - name: ACCOUNT_URL
           valueFrom:
             configMapKeyRef:

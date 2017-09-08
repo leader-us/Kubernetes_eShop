@@ -35,11 +35,11 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: eshop-configmap
-              key: redis-host
+              key: eshop-cart-redis-host
         - name: REDIS_PORT
           valueFrom:
             configMapKeyRef:
               name: eshop-configmap
-              key: redis-port
+              key: eshop-cart-redis-port
         ports:
         - containerPort: 8035

@@ -35,16 +35,16 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: eshop-configmap
-              key: mysql-pass
+              key: eshop-product-mysql-pass
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
               name: eshop-configmap
-              key: mysql-host
+              key: eshop-product-mysql-host
         - name: DB_USER
           valueFrom:
             configMapKeyRef:
               name: eshop-configmap
-              key: mysql-user
+              key: eshop-product-mysql-user
         ports:
         - containerPort: 8036
