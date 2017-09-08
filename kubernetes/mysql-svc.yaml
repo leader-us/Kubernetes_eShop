@@ -15,14 +15,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-mysql
+  name: mysql-svc
   labels:
-    app: web
+    app: mysql-svc
 spec:
   ports:
-    - port: 3306
+    - port: 3306  
   selector:
-    app: web
+    app: mysql-deploy
     tier: mysql
   clusterIP: None
 ---
@@ -31,7 +31,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
   labels:
-    app: web
+    app: mysql
 spec:
   accessModes:
     - ReadWriteOnce
@@ -42,16 +42,16 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: web-mysql
+  name: mysql-deploy
   labels:
-    app: web
+    app: mysql-deploy
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: web
+        app: mysql-deploy
         tier: mysql
     spec:
       containers:
@@ -60,10 +60,20 @@ spec:
         env:
         - name: MYSQL_DATABASE
           value: HPE_APP
+        - name: MYSQL_USER
+          valueFrom: 
+            configMapKeyRef:
+              name: eshop-configmap
+              key: mysql-user
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: mysql-pass
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: web-mysql
+              name: mysql-pass
               key: password.txt
         ports:
         - containerPort: 3306

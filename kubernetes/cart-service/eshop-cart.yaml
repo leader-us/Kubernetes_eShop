@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-cart-svc
+  labels:
+    app: eshop-cart-svc
+spec:
+  ports:
+    - port: 8035
+  selector:
+    app: eshop-cart-deploy
+    tier: frontend
+  clusterIP: None
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-cart-deploy
+  labels:
+    app: eshop-cart-deploy
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: eshop-cart-deploy
+        tier: frontend
+    spec:
+      containers:
+      - image: eshop-cart-image:v1
+        name: eshop-cart
+        env:
+        - name: REDIS_HOST
+          valueFrom: 
+            configMapKeyRef:
+              name: eshop-configmap
+              key: redis-host
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: eshop-configmap
+              key: redis-port
+        ports:
+        - containerPort: 8035

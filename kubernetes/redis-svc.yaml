@@ -1,34 +1,33 @@
 GapiVersion: v1
 kind: Service
 metadata:
-  name: session-redis
+  name: redis-svc
   labels:
-    app: redis-app
+    app: redis-svc
 spec:
   ports:
     - port: 6379
   selector:
-    app: redis-app
+    app: redis-deploy
     tier: redis
   clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: session-redis
+  name: redis-deploy
   labels: 
-    app: redis-app
+    app: redis-deploy
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: redis-app
+        app: redis-deploy
         tier: redis
     spec: 
       containers: 
       - image: redis
         imagePullPolicy: IfNotPresent
         name: reids
-
