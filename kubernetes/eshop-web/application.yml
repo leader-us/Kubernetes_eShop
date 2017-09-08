@@ -1,4 +1,4 @@
-pring:
+spring:
   application:
     name: eshop-web
   redis:
