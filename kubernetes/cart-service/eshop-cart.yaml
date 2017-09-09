@@ -30,16 +30,15 @@ spec:
       containers:
       - image: eshop-cart-image:v1
         name: eshop-cart
-        env:
-        - name: REDIS_HOST
-          valueFrom: 
-            configMapKeyRef:
-              name: eshop-configmap
-              key: redis-host
-        - name: REDIS_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: eshop-configmap
-              key: redis-port
         ports:
         - containerPort: 8035
+        volumeMounts:
+          - name: config-volume
+            mountPath: /opt/app/eshop_service/config
+      volumes:
+      - name: config-volume
+        configMap:
+          name: eshop-configmap
+          items:
+          - key: eshop-cart-conf
+            path: application.yml

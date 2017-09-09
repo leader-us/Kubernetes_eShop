@@ -3,9 +3,16 @@ kind: ConfigMap
 metadata:
   name: eshop-configmap
 data:
-  redis-host: redis-svc
-  redis-port: "6379"
-  mysql-host: mysql-svc
+  eshop-cart-redis-host: redis-svc
+  eshop-web-redis-host: redis-svc
+  eshop-cart-redis-port: "6379"
+  eshop-web-redis-port: "6379"
+  eshop-auth-mysql-host: mysql-svc
+  eshop-product-mysql-host: mysql-svc
+  eshop-auth-mysql-user: lession
+  eshop-product-mysql-user: lession
+  eshop-auth-mysql-pass: mypass
+  eshop-product-mysql-pass: mypass
   mysql-user: lession
   mysql-pass: mypass
   eshop-auth-url: "http://eshop-auth-svc:8034/"

@@ -2,7 +2,7 @@ spring:
   application:
     name: eshop-cart-service
   redis:
-    host: 192.168.18.134
+    host: redis-svc
     port: 6379
     #password:
 server:
