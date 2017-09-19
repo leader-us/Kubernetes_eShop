@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-product
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eshop-product
+    spec:
+      containers:
+      - name: eshop-product
+        image: eshop/eshop-product:1.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: /opt/app/eshop/product/config
+        ports:
+          - containerPort: 8036
+        command: ["/opt/app/eshop/product/eshop-product-svc-run.sh"]
+      volumes:
+      - name: config
+        configMap:
+          name: eshop-product-config  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-product-svc
+spec:
+  type: ClusterIP
+  sessionAffinity: ClientIP
+  selector:
+    app: eshop-product
+  ports:
+  - port: 8036
+    targetPort: 8036

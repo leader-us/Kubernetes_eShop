@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: eshop-auth-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://eshop-mysql-svc:3306/HPE_APP?useSSL=false
+    username: lession
+    password: mypass
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 2
+    minIdle: 2
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: true
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    schema: classpath:create-db.sql
+    data: classpath:demo-data.sql
+    initialize: true
+    continueOnError: true
+server:
+  port: 8034
+  context-path: /
+  tomcat:
+    uri-encoding: UTF-8    
+logging:
+  config: classpath:log4j2.xml
