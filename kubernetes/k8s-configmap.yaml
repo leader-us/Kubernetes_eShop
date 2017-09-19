@@ -1,7 +1,7 @@
 piVersion: v1
 kind: ConfigMap
 metadata:
-  name: eshop-configmap
+  name: eshop-config
 data:
   eshop-cart-redis-host: redis-svc
   eshop-web-redis-host: redis-svc
