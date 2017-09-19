@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eshop-auth
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eshop-auth
+    spec:
+      containers:
+      - name: eshop-auth
+        image: eshop/eshop-auth:1.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: config
+          mountPath: /opt/app/eshop/auth/config
+        ports:
+          - containerPort: 8034
+        command: ["/opt/app/eshop/auth/eshop-auth-svc-run.sh"]
+      volumes:
+      - name: config
+        configMap:
+          name: eshop-auth-config 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eshop-auth-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: eshop-auth
+  ports:
+  - port: 8034
+    targetPort: 8034
