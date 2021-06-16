@@ -13,7 +13,7 @@ spec:
     tier: frontend
   type: LoadBalancer
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-web-deploy
@@ -22,6 +22,9 @@ metadata:
 spec:
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+        app: eshop-web-deploy
   template:
     metadata:
       labels:

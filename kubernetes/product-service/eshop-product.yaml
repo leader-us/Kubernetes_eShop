@@ -12,7 +12,7 @@ spec:
     tier: frontend
   clusterIP: None
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-product-deploy
@@ -21,6 +21,9 @@ metadata:
 spec:
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+        app: eshop-product-deploy
   template:
     metadata:
       labels:

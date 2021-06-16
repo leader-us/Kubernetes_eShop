@@ -11,6 +11,8 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /data/docker/pv-4
+  persistentVolumeReclaimPolicy: Delete
+    
 ---
 apiVersion: v1
 kind: Service
@@ -39,7 +41,7 @@ spec:
     requests:
       storage: 20Gi
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-deploy
@@ -48,6 +50,9 @@ metadata:
 spec:
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+        app: mysql-deploy
   template:
     metadata:
       labels:
